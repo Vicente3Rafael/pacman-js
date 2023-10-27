@@ -25,7 +25,14 @@ class Pacman {
     }
 
     eat() {
-
+        for(let i=0;i< map.length;i++) {
+            for(let j=0;j<map[0].length;j++) {
+                if( map[i][j] == 2 && this.getMapX() == j && this.getMapY() == i) {
+                    map[i][j] = 3;
+                    score++;
+                }
+            }
+        }
     }
 
     moveBackwards() {
@@ -83,8 +90,18 @@ class Pacman {
         return isCollided;
     }
 
-    checkGhostCollision() {
+    checkGhostCollision(ghosts) {
+        for(let i=0;i<ghosts.length;i++) {
+            let ghost = ghosts[i];
+            if(
+                ghost.getMapX() == this.getMapX() && 
+                ghost.getMapY() == this.getMapY()
+            ) {
+                return true;
+            }
 
+            return false;
+        }
     }
 
     changeDirectionPossible() {
